@@ -9,7 +9,7 @@ jobs:
       - run: python main.py
   test:
     docker:
-      - image: cimg/pyhton:3.11
+      - image: cimg/python:3.11
     steps:
       - checkout
       - run: python test.py
@@ -31,4 +31,4 @@ workflows:
           - test
         filters:
           branches:
-            only: main
+            only: maingit
