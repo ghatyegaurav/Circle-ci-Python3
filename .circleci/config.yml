@@ -15,7 +15,7 @@ jobs:
       - run: python test.py
   deploy:
     docker:
-      -image: cimg/python:3.11
+      - image: cimg/python:3.11
     steps:
       - run: echo "Practical Done"
 
@@ -24,10 +24,11 @@ workflows:
     jobs:
       - build
       - test:
-        requires:
-          -build
+          requires:
+          - build
       - deploy:
-        requires:
-          -test
+          requires:
+          - test
         filters:
-        
+          branches:
+            only: main
