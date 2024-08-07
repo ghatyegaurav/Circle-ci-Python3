@@ -3,21 +3,29 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cim/python:3.11
+      - image: cimg/python:3.11
     steps:
       - checkout
-      - run: python main.py
+      - run:
+          name: Run Build
+          command: python main.py
+
   test:
     docker:
       - image: cimg/python:3.11
     steps:
       - checkout
-      - run: python test.py
+      - run:
+          name: Run Tests
+          command: python test.py
+
   deploy:
     docker:
       - image: cimg/python:3.11
     steps:
-      - run: echo "Practical Done"
+      - run:
+          name: Deployment Placeholder
+          command: echo "Deployment Done"
 
 workflows:
   build_and_test_deploy:
@@ -25,10 +33,11 @@ workflows:
       - build
       - test:
           requires:
-          - build
+            - build
       - deploy:
           requires:
-          - test
+            - test
         filters:
           branches:
-            only: maingit
+            only:
+              - main
